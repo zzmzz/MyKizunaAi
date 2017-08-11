@@ -25,32 +25,6 @@
  *
  */
 
-/**
- *
- * Known ISSUES:
- *  - BUG1: can't find member by this NickName:
- *    ' leaver: 艾静<img class="emoji emojiae" text="_web" src="/zh_CN/htmledition/v2/images/spacer.gif" />JOY
- *  - BUG2: leave event not right: sometimes can not found member (any more, because they left)
- * create a room need at least three people
- * when we create a room, the following one is the 3rd people.
- *
- * put name of one of your friend here, or room create function will not work.
- *
- * ::::::::: ___CHANGE ME___ :::::::::
- *                           vvvvvvvvv
- *                           vvvvvvvvv
- *                           vvvvvvvvv
- */
-const HELPER_CONTACT_NAME = 'Bruce LEE'
-
-/**
- *                           ^^^^^^^^^
- *                           ^^^^^^^^^
- *                           ^^^^^^^^^
- * ::::::::: ___CHANGE ME___ :::::::::
- *
- */
-
 /* tslint:disable:variable-name */
 const qrcodeTerminal = require('qrcode-terminal')
 
@@ -92,7 +66,7 @@ console.log(`${url}\n[${code}] Scan QR Code in above url to login: `)
     log.info('Bot', msg)
     await this.say(msg)
 
-    setTimeout(manageDingRoom.bind(this), 3000)
+    setInterval(manageDingRoom.bind(this), 5000)
 })
 
 /**
@@ -113,4 +87,8 @@ console.log(`${url}\n[${code}] Scan QR Code in above url to login: `)
 
 async function manageDingRoom() {
     log.info('Bot', 'manageDingRoom()')
+    const dingRoom = await Room.find({ topic: /^人工智障/i })
+    if (dingRoom) {
+        log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
+    }
 }
