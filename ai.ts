@@ -65,8 +65,6 @@ console.log(`${url}\n[${code}] Scan QR Code in above url to login: `)
     msg = `setting to manageDingRoom() after 3 seconds ... `
     log.info('Bot', msg)
     await this.say(msg)
-
-    setInterval(manageDingRoom.bind(this), 5000)
 })
 
 /**
@@ -84,11 +82,3 @@ console.log(`${url}\n[${code}] Scan QR Code in above url to login: `)
 })
 .init()
     .catch(e => console.error(e))
-
-async function manageDingRoom() {
-    log.info('Bot', 'manageDingRoom()')
-    const dingRoom = await Room.find({ topic: /^人工智障/i })
-    if (dingRoom) {
-        log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
-    }
-}
