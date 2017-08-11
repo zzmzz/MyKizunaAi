@@ -34,7 +34,7 @@ import {
     Room,
     Wechaty,
     log,
-} from 'wechaty'
+} from '../'
 
 console.log(`welcome`)
 const bot = Wechaty.instance({ profile: config.DEFAULT_PROFILE })
