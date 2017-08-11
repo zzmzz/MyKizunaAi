@@ -71,5 +71,6 @@ async function main() {
          * room found
          */
         log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
+        dingRoom.say(`测试定时讲话`)
     }
 }
