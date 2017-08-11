@@ -29,7 +29,6 @@ const qrcodeTerminal = require('qrcode-terminal')
 
 import {
     config,
-    Contact,
     Room,
     Wechaty,
     log,
@@ -45,8 +44,7 @@ bot
         /**
          * Main Contact Bot start from here
          */
-        main()
-
+        setInterval(main.bind(this), 2000)
     })
     .on('logout'	, user => log.info('Bot', `${user.name()} logouted`))
     .on('error'   , e => log.info('Bot', 'error: %s', e))
@@ -67,4 +65,11 @@ bot.init()
 
 async function main() {
     log.info("test success !!!")
+    const dingRoom = await Room.find({ topic: /^ding/i })
+    if (dingRoom) {
+        /**
+         * room found
+         */
+        log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
+    }
 }
