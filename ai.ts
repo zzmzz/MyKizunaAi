@@ -25,7 +25,6 @@
  *
  */
 
-/* tslint:disable:variable-name */
 const qrcodeTerminal = require('qrcode-terminal')
 
 import {
@@ -36,49 +35,36 @@ import {
     log,
 } from '../'
 
-console.log(`welcome`)
 const bot = Wechaty.instance({ profile: config.DEFAULT_PROFILE })
 
 bot
+    .on('login'	  , function(this, user) {
+        log.info('Bot', `${user.name()} logined`)
+        this.say('wechaty contact-bot just logined')
+
+        /**
+         * Main Contact Bot start from here
+         */
+        main()
+
+    })
+    .on('logout'	, user => log.info('Bot', `${user.name()} logouted`))
+    .on('error'   , e => log.info('Bot', 'error: %s', e))
     .on('scan', (url, code) => {
-    if (!/201|200/.test(String(code))) {
-    const loginUrl = url.replace(/\/qrcode\//, '/l/')
-    qrcodeTerminal.generate(loginUrl)
+        if (!/201|200/.test(String(code))) {
+            const loginUrl = url.replace(/\/qrcode\//, '/l/')
+            qrcodeTerminal.generate(loginUrl)
+        }
+        console.log(`${url}\n[${code}] Scan QR Code in above url to login: `)
+    })
+
+bot.init()
+    .catch(e => {
+        log.error('Bot', 'init() fail: %s', e)
+        bot.quit()
+        process.exit(-1)
+    })
+
+async function main() {
+    log.info("test success !!!")
 }
-console.log(`${url}\n[${code}] Scan QR Code in above url to login: `)
-})
-.on('logout'	, user => log.info('Bot', `${user.name()} logouted`))
-.on('error'   , e => log.info('Bot', 'error: %s', e))
-
-/**
- * Global Event: login
- *
- * do initialization inside this event.
- * (better to set a timeout, for browser need time to download other data)
- */
-.on('login', async function(this, user) {
-    let msg = `${user.name()} logined`
-
-    log.info('Bot', msg)
-    await this.say(msg)
-
-    msg = `setting to manageDingRoom() after 3 seconds ... `
-    log.info('Bot', msg)
-    await this.say(msg)
-})
-
-/**
- * Global Event: message
- */
-.on('message', async function(this, message) {
-    const room    = message.room()
-    const sender  = message.from()
-    const content = message.content()
-
-    console.log((room ? '[' + room.topic() + ']' : '')
-        + '<' + sender.name() + '>'
-        + ':' + message.toStringDigest(),
-    )
-})
-.init()
-    .catch(e => console.error(e))
