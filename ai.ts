@@ -65,7 +65,7 @@ bot.init()
 
 async function main() {
     log.info("test success !!!")
-    const dingRoom = await Room.find({ topic: /^ding/i })
+    const dingRoom = await Room.find({ topic: /^人工智障/i })
     if (dingRoom) {
         /**
          * room found
