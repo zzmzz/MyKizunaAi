@@ -26,6 +26,8 @@
  */
 
 const qrcodeTerminal = require('qrcode-terminal')
+const schedule = require('node-schedule');
+
 
 import {
     config,
@@ -41,10 +43,9 @@ bot
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        var CronJob = require('cron').CronJob;
-        new CronJob('* * * * * *', function() {
-            console.log('You will see this message every second');
-        }, null, true, 'Asia/Shanghai');
+        schedule.scheduleJob('* * * * *', function(){
+            console.log('The answer to life, the universe, and everything!');
+        });
         main
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
