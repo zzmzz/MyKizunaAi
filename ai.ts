@@ -71,13 +71,6 @@ async function main() {
          * room found
          */
         log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
-        var date = new Date();//现在时刻
-        var dateIntegralPoint = new Date();//用户登录时刻的下一个整点，也可以设置成某一个固定时刻
-        dateIntegralPoint.setDate(date.getDate())
-        dateIntegralPoint.setHours(date.getHours())
-        dateIntegralPoint.setMinutes(date.getMinutes())
-        dateIntegralPoint.setSeconds(date.getSeconds()+60)
-        setTimeout(main.bind(this), dateIntegralPoint - date)
         dingRoom.say(`测试定时讲话`)
     }
 }
