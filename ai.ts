@@ -45,6 +45,7 @@ bot
         new CronJob('* * * * * *', function() {
             console.log('You will see this message every second');
         }, null, true, 'Asia/Shanghai');
+        main
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
     .on('error', e => log.info('Bot', 'error: %s', e))
@@ -71,6 +72,5 @@ async function main() {
          * room found
          */
         log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
-        dingRoom.say(`测试定时讲话`)
     }
 }
