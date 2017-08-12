@@ -43,7 +43,7 @@ bot
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        schedule.scheduleJob('0 14 * * *', main.bind(this));
+        schedule.scheduleJob('45 11 * * *', main.bind(this));
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
     .on('error', e => log.info('Bot', 'error: %s', e))
@@ -70,6 +70,6 @@ async function main() {
          * room found
          */
         log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
-        dingRoom.say("周六也不要忘记订饭哦（大概下午2点发")
+        // dingRoom.say("周六也不要忘记订饭哦（大概下午2点发")
     }
 }
