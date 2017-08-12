@@ -43,9 +43,7 @@ bot
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        schedule.scheduleJob('* * * * *', function(){
-            main.bind(this)
-        });
+        schedule.scheduleJob('* * * * *', main.bind(this));
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
     .on('error', e => log.info('Bot', 'error: %s', e))
@@ -65,7 +63,8 @@ bot.init()
     })
 
 async function main() {
-    const dingRoom = await Room.find({topic: /^吃块虾片压压惊/i})
+    log.info("test success")
+    const dingRoom = await Room.find({topic: /^吃块虾片/i})
     if (dingRoom) {
         /**
          * room found
