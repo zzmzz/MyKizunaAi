@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- *   MyKizunaAi - https://github.com/zzmzz/mykizunaai
+ *   MyKizunaAi - https://github.com/zzmzz/MyKizunaAi
  *
  *   Based on Wechaty
  *
@@ -43,7 +43,7 @@ bot
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        schedule.scheduleJob('* * 8 * * *', main.bind(this));
+        schedule.scheduleJob('0 0 14 * * 1', main.bind(this));
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
     .on('error', e => log.info('Bot', 'error: %s', e))
@@ -62,14 +62,14 @@ bot.init()
         process.exit(-1)
     })
 
-async function main() {
+async function remind() {
     log.info("test success")
-    const dingRoom = await Room.find({topic: /^吃块虾片/i})
-    if (dingRoom) {
+    const room = await Room.find({topic: /^吃块虾片/i})
+    if (room) {
         /**
          * room found
          */
         log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
-        // dingRoom.say("周六也不要忘记订饭哦（大概下午2点发")
+        room.say("周一不要忘记订饭哦（大概下午2点发")
     }
 }
