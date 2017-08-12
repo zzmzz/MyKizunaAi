@@ -44,9 +44,8 @@ bot
         this.say('wechaty contact-bot just logined')
 
         schedule.scheduleJob('* * * * *', function(){
-            console.log('The answer to life, the universe, and everything!');
+            main.bind(this)
         });
-        main
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
     .on('error', e => log.info('Bot', 'error: %s', e))
