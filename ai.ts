@@ -43,7 +43,8 @@ bot
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        schedule.scheduleJob('0 0 14 * * 1', main.bind(this));
+        schedule.scheduleJob('0 0 14 * * 1', remind.bind(this));
+        schedule.scheduleJob('0 */5 * * * *', remind.bind(this));
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
     .on('error', e => log.info('Bot', 'error: %s', e))
@@ -69,7 +70,14 @@ async function remind() {
         /**
          * room found
          */
-        log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
+        log.info('Bot', 'onMessage: got room: %s', room.topic())
         room.say("周一不要忘记订饭哦（大概下午2点发")
+    }
+}
+
+async function checkAlive() {
+    const room = await Room.find({topic: /^吃块虾片/i})
+    if(room) {
+        log.info('Bot', 'still alive. room find success, room: %s', room.topic())
     }
 }
