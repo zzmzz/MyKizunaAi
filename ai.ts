@@ -34,20 +34,20 @@ import {
     log,
 } from '../'
 
-const bot = Wechaty.instance({ profile: config.DEFAULT_PROFILE })
+const bot = Wechaty.instance({profile: config.DEFAULT_PROFILE})
 
 bot
-    .on('login'	  , function(this, user) {
+    .on('login', function (this, user) {
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        /**
-         * Main Contact Bot start from here
-         */
-        setInterval(main.bind(this), 2000)
+        var CronJob = require('cron').CronJob;
+        new CronJob('* * * * * *', function() {
+            console.log('You will see this message every second');
+        }, null, true, 'Asia/Shanghai');
     })
-    .on('logout'	, user => log.info('Bot', `${user.name()} logouted`))
-    .on('error'   , e => log.info('Bot', 'error: %s', e))
+    .on('logout', user => log.info('Bot', `${user.name()} logouted`))
+    .on('error', e => log.info('Bot', 'error: %s', e))
     .on('scan', (url, code) => {
         if (!/201|200/.test(String(code))) {
             const loginUrl = url.replace(/\/qrcode\//, '/l/')
@@ -65,12 +65,19 @@ bot.init()
 
 async function main() {
     log.info("test success !!!")
-    const dingRoom = await Room.find({ topic: /^人工智障/i })
+    const dingRoom = await Room.find({topic: /^人工智障/i})
     if (dingRoom) {
         /**
          * room found
          */
         log.info('Bot', 'onMessage: got dingRoom: %s', dingRoom.topic())
+        var date = new Date();//现在时刻
+        var dateIntegralPoint = new Date();//用户登录时刻的下一个整点，也可以设置成某一个固定时刻
+        dateIntegralPoint.setDate(date.getDate())
+        dateIntegralPoint.setHours(date.getHours())
+        dateIntegralPoint.setMinutes(date.getMinutes())
+        dateIntegralPoint.setSeconds(date.getSeconds()+60)
+        setTimeout(main.bind(this), dateIntegralPoint - date)
         dingRoom.say(`测试定时讲话`)
     }
 }
