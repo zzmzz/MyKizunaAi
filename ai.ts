@@ -71,10 +71,10 @@ async function remind() {
          * room found
          */
         log.info('Bot', 'onMessage: got room: %s', room.topic())
-        room.say('测试定时消息（大概下午2点发')
+        room.say('新的一周大家不要忘记订餐哦（大概下午2点发')
     }
 }
 
 async function checkAlive() {
-    this.say('wechaty contact-bot still alive')
+    this.say('爱酱 still alive')
 }
