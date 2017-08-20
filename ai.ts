@@ -43,7 +43,7 @@ bot
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        schedule.scheduleJob('0 0 14 * * 1', remind.bind(this));
+        schedule.scheduleJob('*/5 * * * * 1', remind.bind(this));
         schedule.scheduleJob('0 */5 * * * *', checkAlive.bind(this));
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
