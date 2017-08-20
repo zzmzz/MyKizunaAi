@@ -43,7 +43,7 @@ bot
         log.info('Bot', `${user.name()} logined`)
         this.say('wechaty contact-bot just logined')
 
-        schedule.scheduleJob('*/5 * * * * 1', remind.bind(this));
+        schedule.scheduleJob('0 0 14 * * 1', remind.bind(this));
         schedule.scheduleJob('0 */5 * * * *', checkAlive.bind(this));
     })
     .on('logout', user => log.info('Bot', `${user.name()} logouted`))
@@ -74,7 +74,7 @@ async function remind() {
              * room found
              */
             log.info('Bot', 'onMessage: got room: %s', room.topic())
-            //room.say('新的一周大家不要忘记订餐哦（大概下午2点发')
+            room.say('新的一周大家不要忘记订餐哦（大概下午2点发')
         }
     }
 }
