@@ -65,13 +65,16 @@ bot.init()
 
 async function remind() {
     log.info("test success")
-    const room = await Room.find({topic: /^吃块虾片/i})
-    if (room) {
-        /**
-         * room found
-         */
-        log.info('Bot', 'onMessage: got room: %s', room.topic())
-        room.say('新的一周大家不要忘记订餐哦（大概下午2点发')
+    var rooms = new Array("吃块虾片压压惊", "瓴岳科技")
+    for(var searchRoom in rooms) {
+        const room = await Room.find({topic: searchRoom})
+        if (room) {
+            /**
+             * room found
+             */
+            log.info('Bot', 'onMessage: got room: %s', room.topic())
+            //room.say('新的一周大家不要忘记订餐哦（大概下午2点发')
+        }
     }
 }
 
