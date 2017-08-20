@@ -66,9 +66,9 @@ bot.init()
 async function remind() {
     log.info("test success")
     var rooms = new Array("吃块虾片压压惊", "瓴岳科技")
-    for(var searchRoom in rooms) {
-        log.info(searchRoom)
-        const room = await Room.find({topic: searchRoom})
+    for(var index in rooms) {
+        log.info(rooms[index])
+        const room = await Room.find({topic: rooms[index]})
         if (room) {
             /**
              * room found
