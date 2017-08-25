@@ -1,0 +1,5 @@
+*~
+.DS_Store
+.idea
+KizunaAi.wechaty.json
+node_modules
