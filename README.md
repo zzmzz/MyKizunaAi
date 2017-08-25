@@ -11,5 +11,5 @@ Wechat chat robot. based on wechaty
 ## Start
 
 ```
-npm start
+NODE_PORT=<your-port> npm start // default port value is 3000
 ```
