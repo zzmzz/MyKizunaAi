@@ -27,7 +27,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "qrcode-terminal": "^0.11.0",
-    "wechaty": "^0.8.174"
+    "wechaty": "^0.8.174",
+    "node-schedule": "1.2.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

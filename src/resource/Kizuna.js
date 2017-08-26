@@ -49,7 +49,10 @@ class KizunaBot {
             },
 
             say(roomName, content) {
-                if (!roomName) return;
+                if (!roomName) {
+                    wechaty.say(content);
+                    return;
+                }
 
                 Room.find({topic: roomName})
                     .then((room) => {
